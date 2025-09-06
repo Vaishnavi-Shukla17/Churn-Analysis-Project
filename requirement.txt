@@ -1,10 +1,10 @@
   These are required libraries used in this projet 
+streamlit
+pandas
+numpy
+matplotlib
+seaborn
+plotly
+scikit-learn
+xgboost
 
-1-streamlit
-2-Pandas
-3-Numpy
-4-Matplotlib
-5-Seaborn
-6-Plotly
-7-Scikit-learn
-8-XGboost
