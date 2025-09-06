@@ -36,7 +36,9 @@ the app provides actionable insights and recommendations for customer retention 
 
 ## 🚀 Live Demo
 
-**[Try the app here →] https://smart-churn-predictor.streamlit.app/**
+**[Try the app here →] (https://smart-churn-predictor.streamlit.app/)**
+Access sample dataset from here 
+https://raw.githubusercontent.com/Vaishnavi-Shukla17/Churn-Analysis-Project/refs/heads/main/cleaned.csv
 
 *Upload your own dataset or use the sample data to explore all features*
 
