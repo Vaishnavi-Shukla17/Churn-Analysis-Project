@@ -1,4 +1,4 @@
-# app.py
+
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -15,9 +15,7 @@ from xgboost import XGBClassifier
 import warnings
 warnings.filterwarnings('ignore')
 
-# --------------------------
 # Page config
-# --------------------------
 st.set_page_config(
     page_title="Customer Churn Prediction Platform",
     page_icon=None,
@@ -26,9 +24,8 @@ st.set_page_config(
     menu_items={ 'About':"This is my awesome web app"}
 )
 
-# --------------------------
 # Minimal CSS
-# --------------------------
+
 st.markdown("""
 <style>
 .main-header {
@@ -47,18 +44,16 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-# --------------------------
 # Sidebar navigation (no leading spaces)
-# --------------------------
+
 st.sidebar.title("Navigation")
 page = st.sidebar.selectbox(
     "Choose a page:",
     ["Overview", "Data Analysis", "Monitoring", "Model Performance", "Churn Prediction", "About This"]
 )
 
-# --------------------------
+
 # Caching
-# --------------------------
 @st.cache_data
 def load_and_process_data(uploaded_file):
     if uploaded_file.name.endswith(".csv"):
@@ -87,9 +82,9 @@ def train_model(X_train, y_train):
     model.fit(X_train, y_train)
     return model
 
-# --------------------------
+
 # Pages
-# --------------------------
+
 def show_overview():
     st.markdown('<h1 class="main-header">Customer Churn Prediction Platform</h1>', unsafe_allow_html=True)
 
@@ -361,10 +356,7 @@ This Customer Churn Prediction Platform combines:
 - Numeric columns are coerced automatically when possible.
 - For production, consider time-based splits, SHAP explainability, and threshold/ROI policy.
 """)
-
-# --------------------------
-# Router
-# --------------------------
+# Route
 def main():
     try:
         if page == "Overview":
@@ -387,3 +379,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
