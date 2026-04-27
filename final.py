@@ -2,6 +2,7 @@
 import streamlit as st
 import pandas as pd
 import numpy as np
+import shap
 import matplotlib.pyplot as plt
 import seaborn as sns
 import plotly.express as px
@@ -416,7 +417,7 @@ def show_prediction():
     st.pyplot(fig)
 
     # ROC curve
-        st.subheader("ROC Curve")
+    st.subheader("ROC Curve")
 
     y_prob = model.predict_proba(X_test)[:, 1]
 
@@ -447,6 +448,24 @@ def show_prediction():
     ax.barh(feature_importance['Feature'][:10], feature_importance['Importance'][:10])
     ax.invert_yaxis()
     ax.set_title("Top 10 Important Features")
+    st.pyplot(fig)
+
+    st.subheader("Model Explainability (SHAP)")
+
+    # Create SHAP explainer
+    explainer = shap.TreeExplainer(model)
+
+    # Take sample data (small for speed)
+    sample_data = X_test.iloc[:50]
+
+    # Calculate SHAP values
+    shap_values = explainer.shap_values(sample_data)
+
+    # Summary plot
+    st.write("SHAP Summary Plot (Feature Impact)")
+
+    fig, ax = plt.subplots()
+    shap.summary_plot(shap_values, sample_data, show=False)
     st.pyplot(fig)
 
     show_single_prediction(df)
@@ -524,6 +543,21 @@ def show_single_prediction(df):
                 st.write("- Send engagement offers")
             else:
                 st.success("Low Risk - No immediate action")
+
+
+            st.subheader("Why this prediction? (SHAP)")
+
+            explainer = shap.TreeExplainer(model)
+            shap_values = explainer.shap_values(sample_encoded)
+
+            fig, ax = plt.subplots()
+            shap.waterfall_plot(shap.Explanation(
+                values=shap_values[0],
+                base_values=explainer.expected_value,
+                data=sample_encoded.iloc[0]
+            ), show=False)
+
+            st.pyplot(fig)
 def show_model_performance():
     st.title("Model Performance Dashboard")
 
