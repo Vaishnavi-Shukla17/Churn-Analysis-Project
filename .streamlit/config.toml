@@ -1,0 +1,9 @@
+[server]
+# Uploaded files are held in server memory, not on disk.
+maxUploadSize = 200
+
+[theme]
+primaryColor = "#1f77b4"
+
+[browser]
+gatherUsageStats = false
